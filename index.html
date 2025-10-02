@@ -53,7 +53,7 @@
 .site-header {
   position: fixed;
   inset: 0 0 auto 0;
-  height: 88px; /* Navbar yüksekliğini artırdım */
+  height: 88px;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -70,18 +70,18 @@
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  gap: 20px; /* Öğeler arası boşluğu ayarladım */
+  gap: 20px;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-shrink: 0; /* Logo ve marka metninin küçülmesini engelledim */
+  flex-shrink: 0;
 }
 
 .nav-logo {
-  height: 52px; /* Logonun boyutunu ayarladım */
+  height: 52px;
   width: auto;
 }
 
@@ -89,16 +89,16 @@
   font-weight: 800;
   color: #757575;
   letter-spacing: 0.4px;
-  font-size: 18px; /* Marka metni boyutunu ayarladım */
-  white-space: nowrap; /* Metnin alt satıra kaymasını engelledim */
+  font-size: 18px;
+  white-space: nowrap;
 }
 
 .menu {
   list-style: none;
   display: flex;
-  gap: 8px; /* Menü öğeleri arasındaki boşluğu azalttım */
+  gap: 8px;
   align-items: center;
-  flex-wrap: nowrap; /* Öğelerin alt satıra kaymasını engelledim */
+  flex-wrap: nowrap;
   margin: 0;
   padding: 0;
 }
@@ -110,12 +110,12 @@
 
 .menu a {
   color: #475569;
-  padding: 8px 12px; /* Padding değerlerini küçülttüm */
+  padding: 8px 12px;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 14px; /* Yazı boyutunu küçülttüm */
+  font-size: 14px;
   transition: background 0.2s, color 0.2s;
-  white-space: nowrap; /* Metin kaymasını engelledim */
+  white-space: nowrap;
 }
 
 .menu a:hover, .menu a:focus-visible {
@@ -132,10 +132,10 @@
 .menu .btn.primary {
   color: white;
   margin-left: 8px;
-  padding: 8px 16px; /* Buton padding'ini küçülttüm */
+  padding: 8px 16px;
   border-radius: 10px;
   white-space: nowrap;
-  font-size: 14px; /* Buton yazı boyutunu küçülttüm */
+  font-size: 14px;
   box-shadow: 0 4px 12px rgba(14, 165, 233, 0.18);
 }
 
@@ -158,13 +158,13 @@
 /* Mobil görünüm için medya sorguları */
 @media (max-width: 1100px) {
   .brand-text {
-    display: none; /* Orta ekranlarda marka metnini gizledim */
+    display: none;
   }
 }
 
 @media (max-width: 900px) {
   .site-header {
-    height: 76px; /* Mobilde navbar yüksekliğini ayarladım */
+    height: 76px;
     padding: 0 16px;
   }
   
@@ -202,7 +202,7 @@
     display: block;
     padding: 12px 16px;
     text-align: center;
-    font-size: 16px; /* Mobilde yazı boyutunu büyüttüm */
+    font-size: 16px;
   }
   
   .site-header.open .menu-toggle span:nth-child(1) {
@@ -220,7 +220,7 @@
   }
   
   .brand-text {
-    display: block; /* Mobilde marka metnini tekrar gösterdim */
+    display: block;
     font-size: 16px;
   }
 }
@@ -228,11 +228,11 @@
 /* Çok küçük ekranlar için */
 @media (max-width: 360px) {
   .brand-text {
-    font-size: 14px; /* Çok küçük ekranlarda marka metnini küçülttüm */
+    font-size: 14px;
   }
   
   .nav-logo {
-    height: 44px; /* Çok küçük ekranlarda logoyu küçülttüm */
+    height: 44px;
   }
 }
     .menu-toggle{display:none;position:relative;width:32px;height:22px;border:0;background:transparent;cursor:pointer}
@@ -283,18 +283,70 @@
     .service-content{position:absolute;inset:auto 0 0 0;padding:24px;background:linear-gradient(transparent,rgba(0,0,0,0.7));color:#fff}
     .service-content h3{margin:0 0 8px;font-size:22px}
 
-    /* ========== Gallery ========== */
-    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-    @media (max-width:920px){.gallery{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){.gallery{grid-template-columns:1fr}}
-    .gallery img{border-radius:16px;aspect-ratio:4/3;object-fit:cover;border:1px solid #e2e8f0;cursor:pointer;transition:transform .25s,box-shadow .25s}
-    .gallery img:hover{transform:scale(1.02);box-shadow:0 15px 30px rgba(0,0,0,0.15)}
-    .modal{display:none;position:fixed;inset:0;z-index:1001;background:rgba(0,0,0,.9)}
-    .modal.open{display:block}
-    .modal img{position:relative;margin:auto;display:block;width:82%;max-width:900px;max-height:82vh;object-fit:contain;padding:20px}
-    .modal .close{position:absolute;top:16px;right:24px;font-size:38px;color:#fff;cursor:pointer}
+    /* ========== Gallery (GÜNCELLENDİ) ========== */
+    .gallery-section {
+      position: relative;
+      overflow: hidden;
+      padding: 40px 0;
+    }
+    
+    .gallery-container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    .gallery-slider {
+      width: 100%;
+      height: 500px;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    
+    .gallery-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    .gallery-slide.active {
+      opacity: 1;
+    }
+    
+    .gallery-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .gallery-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .gallery-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .gallery-dot.active {
+      background: var(--brand);
+      transform: scale(1.2);
+    }
 
-    /* ========== Testimonials (YENİ ve GELİŞMİŞ) ========== */
+    /* ========== Testimonials (GÜNCELLENDİ) ========== */
     .testimonials{background:var(--bg-soft);padding:80px 0}
     .t-viewport{overflow:hidden; position: relative;}
     .t-track{display:flex;gap:24px;transform:translateX(0);transition:transform .45s ease}
@@ -318,7 +370,7 @@
     .t-scroll-button{width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; border: 1px solid #e2e8f0; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.05);}
     .t-scroll-button:hover{background: var(--brand); color: white; border-color: var(--brand);}
 
-    /* ========== Contact (YENİ) ========== */
+    /* ========== Contact ========== */
     .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
     @media (max-width:980px){.contact-grid{grid-template-columns:1fr}}
     .c-item{display:flex;align-items:flex-start;gap:16px;padding:18px 0;border-bottom:1px solid #e2e8f0}
@@ -354,6 +406,9 @@
       .section{padding:80px 0}
       .btn{min-height:var(--tap);width:100%}
       .btn-row{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+      .gallery-slider {
+        height: 300px;
+      }
     }
     body.nav-open{overflow:hidden;height:100%}
     
@@ -384,7 +439,6 @@
           <li><a href="#galeri">Galeri</a></li>
           <li><a href="#yorumlar">Üyelerimiz Ne Diyor?</a></li>
           <li><a href="#iletisim">İletişim</a></li>
-          <li><a class="btn primary" href="#iletisim">Ücretsiz Deneme</a></li>
         </ul>
       </nav>
     </div>
@@ -400,17 +454,14 @@
           <div class="badge">Yeni sezon • Sınırlı kontenjan</div>
           <h1 class="title xl" style="margin:.6rem 0 1rem;color:#0f172a">İçindeki potansiyeli açığa çıkar.</h1>
           <p class="muted">Şehrin modern spor & wellness merkezinde; GYM, havuz, grup dersleri ve kişiye özel koçluk ile hedefe odaklan.</p>
-          <div class="btn-row">
-            <a class="btn primary" href="#iletisim">Ücretsiz Deneme Randevusu</a>
-            <a class="btn ghost" href="#hizmetler">Hizmetleri Gör</a>
-          </div>
+          
           <div class="kpis">
             <div class="card glass">
               <strong>24</strong>
               <div class="muted">Uzman Ekip</div>
             </div>
             <div class="card glass">
-              <strong>300+</strong>
+              <strong>2500+</strong>
               <div class="muted">Mutlu Üye</div>
             </div>
           </div>
@@ -466,29 +517,55 @@
     </div>
   </section>
 
-  <!-- Galeri -->
-  <section id="galeri" class="section">
+  <!-- Galeri (GÜNCELLENDİ) -->
+  <section id="galeri" class="section gallery-section">
     <div class="container">
       <h2 class="title lg" style="text-align:center;margin-bottom:14px;color:#0f172a">Galeri</h2>
       <p class="muted" style="text-align:center;margin-bottom:34px">Merkezimizden kareler</p>
-      <div class="gallery">
-        <img src="Resimler/Salon görüntüleri/Salon üst kat.png" alt="BE Health Universe spor salonu üst kat görünümü" loading="lazy" decoding="async" width="800" height="600">
-        <img src="Resimler/Salon görüntüleri/Salon alt kat.png" alt="BE Health Universe spor salonu alt kat görünümü" loading="lazy" decoding="async" width="800" height="600">
-        <img src="Resimler/Salon görüntüleri/Salon bisiklet alanı.png" alt="BE Health Universe bisiklet ve kardiyo alanı" loading="lazy" decoding="async" width="800" height="600">
-        <img src="Resimler/Hizmetler/Havuz.png" alt="BE Health Universe havuz alanı genel görünüm" loading="lazy" decoding="async" width="800" height="600">
-        <img src="Resimler/Salon görüntüleri/Yoga salonu.png" alt="BE Health Universe yoga ve pilates stüdyosu" loading="lazy" decoding="async" width="800" height="600">
-        <img src="Resimler/Salon görüntüleri/Fly yoga.png" alt="BE Health Universe fly yoga dersleri" loading="lazy" decoding="async" width="800" height="600">
-        <img src="Resimler/Salon görüntüleri/Tenis Kortu.png" alt="BE Health Universe tenis kortu ve eğitim alanı" loading="lazy" decoding="async" width="800" height="600">
-        <img src="Resimler/Salon görüntüleri/Bahçe.png" alt="BE Health Universe açık hava spor bahçesi" loading="lazy" decoding="async" width="800" height="600">
+      
+      <div class="gallery-container">
+        <div class="gallery-slider">
+          <div class="gallery-slide active">
+            <img src="Resimler/Salon görüntüleri/Salon üst kat.png" alt="BE Health Universe spor salonu üst kat görünümü" loading="lazy" decoding="async">
+          </div>
+          <div class="gallery-slide">
+            <img src="Resimler/Salon görüntüleri/Salon alt kat.png" alt="BE Health Universe spor salonu alt kat görünümü" loading="lazy" decoding="async">
+          </div>
+          <div class="gallery-slide">
+            <img src="Resimler/Salon görüntüleri/Salon bisiklet alanı.png" alt="BE Health Universe bisiklet ve kardiyo alanı" loading="lazy" decoding="async">
+          </div>
+          <div class="gallery-slide">
+            <img src="Resimler/Hizmetler/Havuz.png" alt="BE Health Universe havuz alanı genel görünüm" loading="lazy" decoding="async">
+          </div>
+          <div class="gallery-slide">
+            <img src="Resimler/Salon görüntüleri/Yoga salonu.png" alt="BE Health Universe yoga ve pilates stüdyosu" loading="lazy" decoding="async">
+          </div>
+          <div class="gallery-slide">
+            <img src="Resimler/Salon görüntüleri/Fly yoga.png" alt="BE Health Universe fly yoga dersleri" loading="lazy" decoding="async">
+          </div>
+          <div class="gallery-slide">
+            <img src="Resimler/Salon görüntüleri/Tenis Kortu.png" alt="BE Health Universe tenis kortu ve eğitim alanı" loading="lazy" decoding="async">
+          </div>
+          <div class="gallery-slide">
+            <img src="Resimler/Salon görüntüleri/Bahçe.png" alt="BE Health Universe açık hava spor bahçesi" loading="lazy" decoding="async">
+          </div>
+        </div>
+        
+        <div class="gallery-nav" id="galleryNav">
+          <div class="gallery-dot active" data-index="0"></div>
+          <div class="gallery-dot" data-index="1"></div>
+          <div class="gallery-dot" data-index="2"></div>
+          <div class="gallery-dot" data-index="3"></div>
+          <div class="gallery-dot" data-index="4"></div>
+          <div class="gallery-dot" data-index="5"></div>
+          <div class="gallery-dot" data-index="6"></div>
+          <div class="gallery-dot" data-index="7"></div>
+        </div>
       </div>
-    </div>
-    <div class="modal" id="imgModal" aria-hidden="true">
-      <span class="close" id="imgClose">&times;</span>
-      <img id="imgView" alt="">
     </div>
   </section>
 
-  <!-- Üyelerimiz Ne Diyor? (YENİ ve GELİŞMİŞ) -->
+  <!-- Üyelerimiz Ne Diyor? (GÜNCELLENDİ) -->
   <section id="yorumlar" class="testimonials">
     <div class="container">
       <div class="testimonials-header">
@@ -546,78 +623,13 @@
               </div>
             </div>
           </div>
-          <div class="t-card">
-            <div class="card">
-              <div class="t-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <p class="t-quote">"Havuz ve sauna kombinasyonu harika. Antrenmandan sonra toparlanmam çok hızlandı. Diyetisyen hizmeti sayesinde 4 ayda 12 kilo verdim. Tüm ekibe teşekkürler!"</p>
-              <div class="t-author">
-                <img src="https://randomuser.me/api/portraits/men/71.jpg" alt="Kerem Doğan" width="56" height="56" loading="lazy" decoding="async">
-                <div><strong>Kerem Doğan</strong><div class="muted">4 aydır üye</div></div>
-              </div>
-            </div>
-          </div>
-          <div class="t-card">
-            <div class="card">
-              <div class="t-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <p class="t-quote">"V.I.P Gym bölümü kadın üyeler için mükemmel bir alan. Rahatça spor yapabiliyorum. Ekipmanlar son model ve her daim temiz. Özellikle hijyen konusunda çok titizler."</p>
-              <div class="t-author">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Selin Demir" width="56" height="56" loading="lazy" decoding="async">
-                <div><strong>Selin Demir</strong><div class="muted">8 aydır üye</div></div>
-              </div>
-            </div>
-          </div>
-          <div class="t-card">
-            <div class="card">
-              <div class="t-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <p class="t-quote">"Boks dersleriyle hem stres atıyorum hem de kendimi savunmayı öğreniyorum. Eğitmenler konusunda uzman ve güven verici. MetroCity AVM içinde olması ulaşımı kolaylaştırıyor."</p>
-              <div class="t-author">
-                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Can Öztürk" width="56" height="56" loading="lazy" decoding="async">
-                <div><strong>Can Öztürk</strong><div class="muted">5 aydır üye</div></div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-
-      <div class="t-nav" id="tNav">
-        <div class="dot active" data-i="0"></div>
-        <div class="dot" data-i="1"></div>
-        <div class="dot" data-i="2"></div>
-        <div class="dot" data-i="3"></div>
-        <div class="dot" data-i="4"></div>
-        <div class="dot" data-i="5"></div>
-      </div>
-
-      <div class="t-scroll-buttons">
-        <button class="t-scroll-button" id="tPrev" aria-label="Önceki yorumlar">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="t-scroll-button" id="tNext" aria-label="Sonraki yorumlar">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
+      
     </div>
   </section>
 
-  <!-- Bize Ulaşın (YENİ) -->
+  <!-- Bize Ulaşın -->
   <section id="iletisim" class="section">
     <div class="container">
       <h2 class="title lg" style="text-align:center;margin-bottom:36px;color:#0f172a">Bize Ulaşın</h2>
@@ -682,6 +694,7 @@
           <div class="c-row" style="gap:12px;margin-top:12px">
             <a href="https://www.instagram.com/behealthuniverse/" target="_blank" rel="noopener noreferrer" class="copy-btn" style="color:white;background:#C13584;border-color:#C13584"><i class="fa-brands fa-instagram"></i> Instagram</a>
             <a href="https://www.facebook.com/behealthuniverse/" target="_blank" rel="noopener noreferrer" class="copy-btn" style="color:white;background:#1877F2;border-color:#1877F2"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+            
           </div>
 
           <div id="contactLive" aria-live="polite" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"></div>
@@ -695,7 +708,7 @@
               <input name="ad" placeholder="Ad Soyad" autocomplete="name" required>
               <input name="email" type="email" placeholder="E-posta" autocomplete="email" required>
               <input name="tel" placeholder="Telefon" inputmode="tel" autocomplete="tel" required>
-              <textarea name="mesaj" rows="5" placeholder="Mesajınız (örn: 1 günlük deneme istiyorum)" required></textarea>
+              <textarea name="mesaj" rows="5" placeholder="Mesajınız:" required></textarea>
               <button type="submit" class="btn primary" style="width:100%">Gönder</button>
               <div class="c-ok" id="cOk">Mesajınız gönderildi. En kısa sürede dönüş yapacağız.</div>
             </form>
@@ -783,23 +796,43 @@
       btn.addEventListener('click', ()=> scrollTo({top:0,behavior:'smooth'}));
     })();
 
-    // Galeri Modal
+    // Galeri Slider (YENİ)
     (function(){
-      const modal = document.getElementById('imgModal');
-      const view  = document.getElementById('imgView');
-      const close = document.getElementById('imgClose');
-      if(!modal||!view||!close) return;
-
-      document.querySelectorAll('.gallery img').forEach(img=>{
-        img.addEventListener('click', ()=>{
-          view.src = img.src;
-          modal.classList.add('open');
+      const slides = document.querySelectorAll('.gallery-slide');
+      const dots = document.querySelectorAll('.gallery-dot');
+      let currentSlide = 0;
+      let slideInterval;
+      
+      function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        currentSlide = (n + slides.length) % slides.length;
+        
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+      }
+      
+      function nextSlide() {
+        showSlide(currentSlide + 1);
+      }
+      
+      // Her 4 saniyede bir geçiş
+      function startSlideShow() {
+        slideInterval = setInterval(nextSlide, 6000);
+      }
+      
+      // Dot'lara tıklama
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          clearInterval(slideInterval);
+          showSlide(parseInt(dot.getAttribute('data-index')));
+          startSlideShow();
         });
       });
-      const hide = ()=> modal.classList.remove('open');
-      close.addEventListener('click', hide);
-      addEventListener('keydown', e=>{ if(e.key==='Escape') hide(); });
-      modal.addEventListener('click', e=>{ if(e.target===modal) hide(); });
+      
+      // Slayt gösterisini başlat
+      startSlideShow();
     })();
 
     // Testimonials slider (dots)
