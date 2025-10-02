@@ -50,195 +50,213 @@
     .glass{backdrop-filter:blur(10px);background:rgba(255, 255, 255, 0.7);border:1px solid rgba(255, 255, 255, 0.8)}
 
     /* ========== Header/Nav ========== */
-    .site-header {
-      position: fixed;
-      inset: 0 0 auto 0;
-      height: 88px; /* Navbar yüksekliğini artırdım */
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: saturate(180%) blur(14px);
-      border-bottom: 1px solid #e2e8f0;
-      padding: 0 24px;
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 88px; /* Navbar yüksekliğini artırdım */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0 24px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  gap: 20px; /* Öğeler arası boşluğu ayarladım */
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0; /* Logo ve marka metninin küçülmesini engelledim */
+}
+
+.nav-logo {
+  height: 52px; /* Logonun boyutunu ayarladım */
+  width: auto;
+}
+
+.brand-text {
+  font-weight: 800;
+  color: #757575;
+  letter-spacing: 0.4px;
+  font-size: 18px; /* Marka metni boyutunu ayarladım */
+  white-space: nowrap; /* Metnin alt satıra kaymasını engelledim */
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 8px; /* Menü öğeleri arasındaki boşluğu azalttım */
+  align-items: center;
+  flex-wrap: nowrap; /* Öğelerin alt satıra kaymasını engelledim */
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+}
+
+.menu a {
+  color: #475569;
+  padding: 8px 12px; /* Padding değerlerini küçülttüm */
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px; /* Yazı boyutunu küçülttüm */
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap; /* Metin kaymasını engelledim */
+}
+
+.menu a:hover, .menu a:focus-visible {
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.08);
+  outline: none;
+}
+
+.menu a.active {
+  color: #0f172a;
+  background: rgba(14, 165, 233, 0.12);
+}
+
+.menu .btn.primary {
+  color: white;
+  margin-left: 8px;
+  padding: 8px 16px; /* Buton padding'ini küçülttüm */
+  border-radius: 10px;
+  white-space: nowrap;
+  font-size: 14px; /* Buton yazı boyutunu küçülttüm */
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.18);
+}
+
+.menu .btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(14, 165, 233, 0.28);
+}
+
+.menu-toggle {
+  display: none;
+  position: relative;
+  width: 32px;
+  height: 22px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Mobil görünüm için medya sorguları */
+@media (max-width: 1100px) {
+  .brand-text {
+    display: none; /* Orta ekranlarda marka metnini gizledim */
+  }
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    height: 76px; /* Mobilde navbar yüksekliğini ayarladım */
+    padding: 0 16px;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  .menu {
+    position: fixed;
+    top: 76px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    padding: 20px;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid #e2e8f0;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    max-height: calc(100svh - 76px);
+    overflow: auto;
+    transition: transform 0.3s, opacity 0.3s, visibility 0.3s;
+    pointer-events: none;
+  }
+  
+  .site-header.open .menu {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  
+  .menu a {
+    display: block;
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 16px; /* Mobilde yazı boyutunu büyüttüm */
+  }
+  
+  .site-header.open .menu-toggle span:nth-child(1) {
+    top: 9.5px;
+    transform: rotate(45deg);
+  }
+  
+  .site-header.open .menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .site-header.open .menu-toggle span:nth-child(3) {
+    top: 9.5px;
+    transform: rotate(-45deg);
+  }
+  
+  .brand-text {
+    display: block; /* Mobilde marka metnini tekrar gösterdim */
+    font-size: 16px;
+  }
+}
+
+/* Çok küçük ekranlar için */
+@media (max-width: 360px) {
+  .brand-text {
+    font-size: 14px; /* Çok küçük ekranlarda marka metnini küçülttüm */
+  }
+  
+  .nav-logo {
+    height: 44px; /* Çok küçük ekranlarda logoyu küçülttüm */
+  }
+}
+    .menu-toggle{display:none;position:relative;width:32px;height:22px;border:0;background:transparent;cursor:pointer}
+    .menu-toggle span{position:absolute;left:0;right:0;height:3px;background:var(--text);border-radius:3px;transition:transform .3s,opacity .3s,top .3s}
+    .menu-toggle span:nth-child(1){top:0}
+    .menu-toggle span:nth-child(2){top:9.5px}
+    .menu-toggle span:nth-child(3){top:19px}
+
+    @media (max-width:900px){
+      :root{--logo:52px;--header-h:calc(var(--logo) + 24px)}
+      .menu-toggle{display:block}
+      nav{position:fixed;inset:var(--header-h) 0 auto 0}
+      .menu{flex-direction:column;padding:20px;gap:12px;background:rgba(255,255,255,0.98);border-bottom:1px solid #e2e8f0;transform:translateY(-100%);opacity:0;visibility:hidden;max-height:calc(100svh - var(--header-h));overflow:auto;transition:transform .3s,opacity .3s,visibility .3s;pointer-events:none}
+      .site-header.open .menu{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto}
+      .menu a{display:block;padding:12px 14px}
+      .site-header.open .menu-toggle span:nth-child(1){top:9.5px;transform:rotate(45deg)}
+      .site-header.open .menu-toggle span:nth-child(2){opacity:0}
+      .site-header.open .menu-toggle span:nth-child(3){top:9.5px;transform:rotate(-45deg)}
     }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      max-width: var(--container);
-      margin: 0 auto;
-      gap: 20px; /* Öğeler arası boşluğu ayarladım */
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0; /* Logo ve marka metninin küçülmesini engelledim */
-    }
-
-    .nav-logo {
-      height: 52px; /* Logonun boyutunu ayarladım */
-      width: auto;
-    }
-
-    .brand-text {
-      font-weight: 800;
-      color: #757575;
-      letter-spacing: 0.4px;
-      font-size: 18px; /* Marka metni boyutunu ayarladım */
-      white-space: nowrap; /* Metnin alt satıra kaymasını engelledim */
-    }
-
-    .menu {
-      list-style: none;
-      display: flex;
-      gap: 8px; /* Menü öğeleri arasındaki boşluğu azalttım */
-      align-items: center;
-      flex-wrap: nowrap; /* Öğelerin alt satıra kaymasını engelledim */
-      margin: 0;
-      padding: 0;
-    }
-
-    .menu li {
-      display: flex;
-      align-items: center;
-    }
-
-    .menu a {
-      color: #475569;
-      padding: 8px 12px; /* Padding değerlerini küçülttüm */
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 14px; /* Yazı boyutunu küçülttüm */
-      transition: background 0.2s, color 0.2s;
-      white-space: nowrap; /* Metin kaymasını engelle */
-    }
-
-    .menu a:hover, .menu a:focus-visible {
-      color: #0f172a;
-      background: rgba(15, 23, 42, 0.08);
-      outline: none;
-    }
-
-    .menu a.active {
-      color: #0f172a;
-      background: rgba(14, 165, 233, 0.12);
-    }
-
-    .menu .btn.primary {
-      color: white;
-      margin-left: 8px;
-      padding: 8px 16px; /* Buton padding'ini küçülttüm */
-      border-radius: 10px;
-      white-space: nowrap;
-      font-size: 14px; /* Buton yazı boyutunu küçülttüm */
-      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.18);
-    }
-
-    .menu .btn.primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(14, 165, 233, 0.28);
-    }
-
-    .menu-toggle {
-      display: none;
-      position: relative;
-      width: 32px;
-      height: 22px;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    /* Mobil görünüm için medya sorguları */
-    @media (max-width: 1100px) {
-      .brand-text {
-        display: none; /* Orta ekranlarda marka metnini gizledim */
-      }
-    }
-
-    @media (max-width: 900px) {
-      .site-header {
-        height: 76px; /* Mobilde navbar yüksekliğini ayarladım */
-        padding: 0 16px;
-      }
-      
-      .menu-toggle {
-        display: block;
-      }
-      
-      .menu {
-        position: fixed;
-        top: 76px;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        padding: 20px;
-        gap: 12px;
-        background: rgba(255, 255, 255, 0.98);
-        border-bottom: 1px solid #e2e8f0;
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        max-height: calc(100svh - 76px);
-        overflow: auto;
-        transition: transform 0.3s, opacity 0.3s, visibility 0.3s;
-        pointer-events: none;
-      }
-      
-      .site-header.open .menu {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-      }
-      
-      .menu a {
-        display: block;
-        padding: 12px 16px;
-        text-align: center;
-        font-size: 16px; /* Mobilde yazı boyutunu büyüttüm */
-      }
-      
-      .site-header.open .menu-toggle span:nth-child(1) {
-        top: 9.5px;
-        transform: rotate(45deg);
-      }
-      
-      .site-header.open .menu-toggle span:nth-child(2) {
-        opacity: 0;
-      }
-      
-      .site-header.open .menu-toggle span:nth-child(3) {
-        top: 9.5px;
-        transform: rotate(-45deg);
-      }
-      
-      .brand-text {
-        display: block; /* Mobilde marka metnini tekrar gösterdim */
-        font-size: 16px;
-      }
-    }
-
-    /* Çok küçük ekranlar için */
-    @media (max-width: 360px) {
-      .brand-text {
-        font-size: 14px; /* Çok küçük ekranlarda marka metnini küçülttüm */
-      }
-      
-      .nav-logo {
-        height: 44px; /* Çok küçük ekranlarda logoyu küçültüldü */
-      }
-    }
     /* ========== Hero ========== */
     .hero{position:relative;min-height:100vh;padding-top:var(--header-h);display:flex;align-items:center;overflow:hidden}
     @supports (min-height:100svh){.hero{min-height:100svh}}
-    .hero-bg{position:absolute;inset:0;background:url("Resimler/Hizmetler/Anaresim.png?v=1") center/cover no-repeat;filter:grayscale(.08) contrast(1.02) brightness(.85);z-index:-2}
+    .hero-bg{position:absolute;inset:0;background:url("Resimler/Hizmetler/Anaresim.webp") center/cover no-repeat;filter:grayscale(.08) contrast(1.02) brightness(.85);z-index:-2}
     .hero-overlay{position:absolute;inset:0;z-index:-1;background:
       linear-gradient(180deg,rgba(255,255,255,0.85) 0%,rgba(255,255,255,0.7) 14%,rgba(255,255,255,0.9) 100%)}
     .hero-content{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 24px}
@@ -247,12 +265,14 @@
     .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
     .kpis .card{padding:18px;text-align:center}
     .kpis strong{font-size:24px;display:block;margin-bottom:6px;color:#0891b2}
+
     /* ========== About ========== */
     .about{max-width:800px;margin:0 auto 30px}
     .about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
     @media (max-width:700px){.about-grid{grid-template-columns:1fr}}
     .about-head{display:flex;align-items:center;gap:14px;margin-bottom:12px}
     .about-ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(120deg,var(--brand),var(--brand2));color:white;font-size:20px}
+
     /* ========== Services ========== */
     .services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
     @media (max-width:1100px){.services-grid{grid-template-columns:repeat(2,1fr)}}
@@ -262,6 +282,7 @@
     .service-card:hover img{transform:scale(1.06)}
     .service-content{position:absolute;inset:auto 0 0 0;padding:24px;background:linear-gradient(transparent,rgba(0,0,0,0.7));color:#fff}
     .service-content h3{margin:0 0 8px;font-size:22px}
+
     /* ========== Gallery ========== */
     .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
     @media (max-width:920px){.gallery{grid-template-columns:repeat(2,1fr)}}
@@ -272,6 +293,7 @@
     .modal.open{display:block}
     .modal img{position:relative;margin:auto;display:block;width:82%;max-width:900px;max-height:82vh;object-fit:contain;padding:20px}
     .modal .close{position:absolute;top:16px;right:24px;font-size:38px;color:#fff;cursor:pointer}
+
     /* ========== Testimonials (YENİ ve GELİŞMİŞ) ========== */
     .testimonials{background:var(--bg-soft);padding:80px 0}
     .t-viewport{overflow:hidden; position: relative;}
@@ -290,10 +312,12 @@
     .testimonials-header p{max-width: 600px; margin: 0 auto;}
     @media(min-width:900px){.t-card{flex-basis:calc(50% - 12px)}}
     @media(min-width:1200px){.t-card{flex-basis:calc(33.333% - 16px)}}
+
     /* Yeni testimonial stilleri */
     .t-scroll-buttons{display: flex; justify-content: center; gap: 12px; margin-top: 24px;}
     .t-scroll-button{width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; border: 1px solid #e2e8f0; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.05);}
     .t-scroll-button:hover{background: var(--brand); color: white; border-color: var(--brand);}
+
     /* ========== Contact (YENİ) ========== */
     .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
     @media (max-width:980px){.contact-grid{grid-template-columns:1fr}}
@@ -313,6 +337,7 @@
     .c-ok{display:none;margin-top:10px;background:var(--ok);color:white;padding:12px;border-radius:10px;font-weight:800;text-align:center}
     .c-text,.c-text a{overflow-wrap:anywhere;word-break:break-word}
     @media (max-width:640px){.c-ico{width:48px;height:48px;font-size:18px}}
+
     /* ========== Footer & BackTop ========== */
     footer{border-top:1px solid #e2e8f0;background:#f8fafc;padding:60px 0 40px}
     .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
@@ -323,6 +348,7 @@
     .backtop{position:fixed;right:26px;bottom:26px;width:var(--tap);height:var(--tap);border-radius:50%;background:linear-gradient(120deg,var(--brand),var(--brand2));color:white;display:grid;place-items:center;font-weight:900;cursor:pointer;opacity:0;visibility:hidden;transition:.3s;z-index:50;box-shadow:0 8px 20px rgba(8, 145, 178, 0.3)}
     .backtop.show{opacity:1;visibility:visible}
     .backtop{bottom:calc(26px + env(safe-area-inset-bottom, 0px))}
+
     /* ========== Mobile niceties ========== */
     @media (max-width:640px){
       .section{padding:80px 0}
@@ -481,7 +507,7 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
               </div>
-                            <p class="t-quote">"BE Health Universe'e başlayalı 6 ay oldu ve hayatım tamamen değişti. Hem fiziksel hem de mental olarak çok daha iyiyim. Eğitmenlerin ilgisi ve profesyonellikleri gerçekten takdire şayan."</p>
+              <p class="t-quote">"BE Health Universe'e başlayalı 6 ay oldu ve hayatım tamamen değişti. Hem fiziksel hem de mental olarak çok daha iyiyim. Eğitmenlerin ilgisi ve profesyonellikleri gerçekten takdire şayan."</p>
               <div class="t-author">
                 <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Ayşe Yılmaz" width="56" height="56" loading="lazy" decoding="async">
                 <div><strong>Ayşe Yılmaz</strong><div class="muted">6 aydır üye</div></div>
@@ -665,12 +691,11 @@
         <div>
           <div class="c-card">
             <h3 class="title md" style="margin-bottom:12px;color:#0f172a">Mesaj Gönderin</h3>
-            <form class="c-form" id="contactForm" action="https://web3forms.com/api/v1/send" method="POST" novalidate>
+            <form class="c-form" id="contactForm" novalidate>
               <input name="ad" placeholder="Ad Soyad" autocomplete="name" required>
               <input name="email" type="email" placeholder="E-posta" autocomplete="email" required>
               <input name="tel" placeholder="Telefon" inputmode="tel" autocomplete="tel" required>
               <textarea name="mesaj" rows="5" placeholder="Mesajınız (örn: 1 günlük deneme istiyorum)" required></textarea>
-              <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE"> <!-- Web3Forms access key -->
               <button type="submit" class="btn primary" style="width:100%">Gönder</button>
               <div class="c-ok" id="cOk">Mesajınız gönderildi. En kısa sürede dönüş yapacağız.</div>
             </form>
@@ -888,4 +913,3 @@
   </script>
 </body>
 </html>
-
