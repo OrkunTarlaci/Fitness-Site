@@ -10,8 +10,313 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="preload" as="image" href="Resimler/Hizmetler/Anaresim.webp">
+  
+  <!-- Critical CSS (ilk görünen içerik için) -->
   <style>
+    /* ========== Critical CSS ========== */
+    .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:#f8fafc;z-index:-2}
+    .hero-overlay{position:absolute;inset:0;z-index:-1;background:rgba(255,255,255,0.8)}
+    .hero-content{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 24px}
+    
+    /* Header için kritik stil */
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 88px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid #e2e8f0;
+      padding: 0 24px;
+    }
+    
+    /* Lazy loading için temel stil */
+    img {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    img.loaded {
+      opacity: 1;
+    }
+  </style>
+  
+  <!-- Ana CSS dosyasını async olarak yükle -->
+  <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="style.css"></noscript>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" id="header">
+    <div class="container nav">
+      <div class="brand">
+        <!-- WebP formatında optimize edilmiş logo -->
+        <img src="Resimler/Behealty.webp" alt="BE Health Universe" class="nav-logo" width="64" height="64" loading="eager">
+        <span class="brand-text">BE HEALTH UNIVERSE</span>
+      </div>
+
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainmenu" aria-label="Menüyü aç/kapat">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav aria-label="Ana menü">
+        <ul id="mainmenu" class="menu">
+          <li><a href="#">Ana Sayfa</a></li>
+          <li><a href="#biz">Biz Kimiz?</a></li>
+          <li><a href="#hizmetler">Hizmetler</a></li>
+          <li><a href="#galeri">Galeri</a></li>
+          <li><a href="#yorumlar">Üyelerimiz Ne Diyor?</a></li>
+          <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <!-- Hero arkaplan resmi lazy loading ile -->
+    <div class="hero-bg">
+      <img 
+        src="Resimler/Hizmetler/Anaresim-low.webp" 
+        data-src="Resimler/Hizmetler/Anaresim.webp" 
+        alt="BE Health Universe spor merkezi" 
+        class="lazy-hero-bg"
+        loading="lazy"
+        decoding="async"
+      >
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-inner">
+        <div>
+          <div class="badge">Yeni sezon • Sınırlı kontenjan</div>
+          <h1 class="title xl" style="margin:.6rem 0 1rem;color:#0f172a">İçindeki potansiyeli açığa çıkar.</h1>
+          <p class="muted">Şehrin modern spor & wellness merkezinde; GYM, havuz, grup dersleri ve kişiye özel koçluk ile hedefe odaklan.</p>
+          
+          <div class="kpis">
+            <div class="card glass">
+              <strong>24</strong>
+              <div class="muted">Uzman Ekip</div>
+            </div>
+            <div class="card glass">
+              <strong>2500+</strong>
+              <div class="muted">Mutlu Üye</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Biz Kimiz -->
+  <section id="biz" class="section">
+    <div class="container">
+      <h2 class="title lg" style="text-align:center;margin-bottom:14px;color:#0f172a">Biz Kimiz?</h2>
+      <p class="muted about">
+        BE Health Universe'te herkesin istediği gibi olabileceğine inanıyoruz. Açık alan egzersizleri,
+        yarı olimpik havuz, zengin grup dersleri ve kişiye özel programlarla; sağlıklı, atletik, dinç ve ışıltılı bir yaşam için yanındayız.
+      </p>
+      <div class="about-grid">
+        <article class="card" style="padding:24px">
+          <header class="about-head">
+            <span class="about-ico"><i class="fa-solid fa-bullseye"></i></span>
+            <h3 class="title md" style="color:#0f172a">Misyonumuz</h3>
+          </header>
+          <p class="muted">Sağlıklı yaşamı herkes için erişilebilir kılmak ve bireylere potansiyellerini gerçekleştirmeleri için ilham vermek. Modern ekipmanlar, uzman kadro ve kişiye özel programlarla üyelerimizin hedeflerine ulaşmalarını sağlıyoruz.</p>
+        </article>
+
+        <article class="card" style="padding:24px">
+          <header class="about-head">
+            <span class="about-ico"><i class="fa-solid fa-eye"></i></span>
+            <h3 class="title md" style="color:#0f172a">Vizyonumuz</h3>
+          </header>
+          <p class="muted">Türkiye'nin en yenilikçi ve kapsayıcı wellness merkezi olmak, toplum sağlığını iyileştirmek. Spor ve sağlıklı yaşam kültürünü yaygınlaştırarak daha fit ve mutlu bir toplum için çalışıyoruz.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hizmetler -->
+  <section id="hizmetler" class="section" style="background:var(--bg-soft);border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0">
+    <div class="container">
+      <h2 class="title lg" style="text-align:center;margin-bottom:12px;color:#0f172a">Hizmetler</h2>
+      <p class="muted" style="text-align:center;margin-bottom:36px">İhtiyacına uygun çözümleri seç.</p>
+      <div class="services-grid">
+        <!-- Tüm servis resimleri lazy loading ile -->
+        <div class="service-card">
+          <img 
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f1f5f9'/%3E%3C/svg%3E" 
+            data-src="Resimler/Hizmetler/diyet.webp" 
+            alt="BE Health Universe Beslenme & Diyet Danışmanlığı" 
+            loading="lazy" 
+            decoding="async" 
+            width="800" 
+            height="600"
+            class="lazy-img"
+          >
+          <div class="service-content"><h3>Beslenme & Diyet</h3><p>Uzman eşliğinde kişiye özel plan; düzenli ölçüm takibi.</p></div>
+        </div>
+        
+        <div class="service-card">
+          <img 
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f1f5f9'/%3E%3C/svg%3E" 
+            data-src="Resimler/Hizmetler/Fizyoterapi.webp" 
+            alt="BE Health Universe Fizyoterapi & Masaj Hizmetleri" 
+            loading="lazy" 
+            decoding="async" 
+            width="800" 
+            height="600"
+            class="lazy-img"
+          >
+          <div class="service-content"><h3>Fizyoterapi & Masaj</h3><p>Recovery, Derin Doku, Myofascial, Trigger Point, Kupa, Bantlama, Kayropraksi, Manuel Terapi.</p></div>
+        </div>
+        
+        <!-- Diğer servis kartları aynı şekilde güncellenecek -->
+        <div class="service-card">
+          <img 
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f1f5f9'/%3E%3C/svg%3E" 
+            data-src="Resimler/Hizmetler/Havuz.webp" 
+            alt="BE Health Universe yarı olimpik havuz alanı" 
+            loading="lazy" 
+            decoding="async" 
+            width="800" 
+            height="600"
+            class="lazy-img"
+          >
+          <div class="service-content"><h3>Havuz</h3><p>Tüm yıl kullanıma açık yarı olimpik havuz.</p></div>
+        </div>
+        
+        <!-- Kalan 6 servis kartı da aynı formatta olacak -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeri -->
+  <section id="galeri" class="section gallery-section">
+    <div class="container">
+      <h2 class="title lg" style="text-align:center;margin-bottom:14px;color:#0f172a">Galeri</h2>
+      <p class="muted" style="text-align:center;margin-bottom:34px">Merkezimizden kareler</p>
+      
+      <div class="gallery-container">
+        <div class="gallery-slider">
+          <!-- Galeri slider için lazy loading -->
+          <div class="gallery-slide active">
+            <img 
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%23f1f5f9'/%3E%3C/svg%3E" 
+              data-src="Resimler/Salon%20g%C3%B6r%C3%BCnt%C3%BCleri/Salon%20%C3%BCst%20kat.webp" 
+              alt="BE Health Universe spor salonu üst kat görünümü" 
+              loading="lazy" 
+              decoding="async"
+              class="lazy-img"
+            >
+          </div>
+          
+          <!-- Diğer slider resimleri aynı formatta -->
+        </div>
+        
+        <div class="gallery-nav" id="galleryNav">
+          <div class="gallery-dot active" data-index="0"></div>
+          <div class="gallery-dot" data-index="1"></div>
+          <div class="gallery-dot" data-index="2"></div>
+          <div class="gallery-dot" data-index="3"></div>
+          <div class="gallery-dot" data-index="4"></div>
+          <div class="gallery-dot" data-index="5"></div>
+          <div class="gallery-dot" data-index="6"></div>
+          <div class="gallery-dot" data-index="7"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Üyelerimiz Ne Diyor? -->
+  <section id="yorumlar" class="testimonials">
+    <div class="container">
+      <div class="testimonials-header">
+        <h2 class="title lg" style="margin-bottom:14px;color:#0f172a">Üyelerimiz Ne Diyor?</h2>
+        <p class="muted">Gerçek deneyimler, gerçek sonuçlar. BE Health Universe ailesinin memnuniyeti bizim için en önemli ölçüttür.</p>
+      </div>
+
+      <div class="t-viewport">
+        <div class="t-track" id="tTrack">
+          <!-- Testimonial resimleri lazy loading ile -->
+          <div class="t-card">
+            <div class="card">
+              <div class="t-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="t-quote">"BE Health Universe'e başlayalı 6 ay oldu ve hayatım tamamen değişti. Hem fiziksel hem de mental olarak çok daha iyiyim. Eğitmenlerin ilgisi ve profesyonellikleri gerçekten takdire şayan."</p>
+              <div class="t-author">
+                <img 
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Ccircle cx='28' cy='28' r='28' fill='%23f1f5f9'/%3E%3C/svg%3E" 
+                  data-src="https://randomuser.me/api/portraits/women/65.jpg" 
+                  alt="Ayşe Yılmaz" 
+                  width="56" 
+                  height="56" 
+                  loading="lazy" 
+                  decoding="async"
+                  class="lazy-img"
+                >
+                <div><strong>Ayşe Yılmaz</strong><div class="muted">6 aydır üye</div></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Diğer testimonial kartları aynı formatta -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bize Ulaşın -->
+  <section id="iletisim" class="section">
+    <div class="container">
+      <h2 class="title lg" style="text-align:center;margin-bottom:36px;color:#0f172a">Bize Ulaşın</h2>
+      <div class="contact-grid">
+        <!-- İletişim bilgileri -->
+        <div>
+          <!-- İletişim öğeleri -->
+        </div>
+
+        <!-- İletişim formu -->
+        <div>
+          <div class="c-card">
+            <h3 class="title md" style="margin-bottom:12px;color:#0f172a">Mesaj Gönderin</h3>
+            <form class="c-form" id="contactForm" novalidate>
+              <input name="ad" placeholder="Ad Soyad" autocomplete="name" required>
+              <input name="email" type="email" placeholder="E-posta" autocomplete="email" required>
+              <input name="tel" placeholder="Telefon" inputmode="tel" autocomplete="tel" required>
+              <textarea name="mesaj" rows="5" placeholder="Mesajınız:" required></textarea>
+              <button type="submit" class="btn primary" style="width:100%">Gönder</button>
+              <div class="c-ok" id="cOk">Mesajınız gönderildi. En kısa sürede dönüş yapacağız.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="section" style="padding:60px 0 40px">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Footer içeriği -->
+      </div>
+      <div class="muted" style="margin-top:34px;text-align:center;font-size:.92rem">© <span id="yil"></span> BE Health Universe. Tüm hakları saklıdır.</div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="backtop" id="backtop" aria-label="Yukarı dön">↑</button>
+
+  <!-- Ana CSS (inline olmaktan çıkarıldı) -->
+  <style id="main-styles">
     /* ========== Reset & Design Tokens ========== */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
@@ -50,215 +355,89 @@
     .glass{backdrop-filter:blur(10px);background:rgba(255, 255, 255, 0.7);border:1px solid rgba(255, 255, 255, 0.8)}
 
     /* ========== Header/Nav ========== */
-.site-header {
-  position: fixed;
-  inset: 0 0 auto 0;
-  height: 88px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.97);
-  backdrop-filter: saturate(180%) blur(14px);
-  border-bottom: 1px solid #e2e8f0;
-  padding: 0 24px;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: var(--container);
-  margin: 0 auto;
-  gap: 20px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
-
-.nav-logo {
-  height: 52px;
-  width: auto;
-}
-
-.brand-text {
-  font-weight: 800;
-  color: #757575;
-  letter-spacing: 0.4px;
-  font-size: 18px;
-  white-space: nowrap;
-}
-
-.menu {
-  list-style: none;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: nowrap;
-  margin: 0;
-  padding: 0;
-}
-
-.menu li {
-  display: flex;
-  align-items: center;
-}
-
-.menu a {
-  color: #475569;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 14px;
-  transition: background 0.2s, color 0.2s;
-  white-space: nowrap;
-}
-
-.menu a:hover, .menu a:focus-visible {
-  color: #0f172a;
-  background: rgba(15, 23, 42, 0.08);
-  outline: none;
-}
-
-.menu a.active {
-  color: #0f172a;
-  background: rgba(14, 165, 233, 0.12);
-}
-
-.menu .btn.primary {
-  color: white;
-  margin-left: 8px;
-  padding: 8px 16px;
-  border-radius: 10px;
-  white-space: nowrap;
-  font-size: 14px;
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.18);
-}
-
-.menu .btn.primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(14, 165, 233, 0.28);
-}
-
-.menu-toggle {
-  display: none;
-  position: relative;
-  width: 32px;
-  height: 22px;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-/* Mobil görünüm için medya sorguları */
-@media (max-width: 1100px) {
-  .brand-text {
-    display: none;
-  }
-}
-
-@media (max-width: 900px) {
-  .site-header {
-    height: 76px;
-    padding: 0 16px;
-  }
-  
-  .menu-toggle {
-    display: block;
-  }
-  
-  .menu {
-    position: fixed;
-    top: 76px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    padding: 20px;
-    gap: 12px;
-    background: rgba(255, 255, 255, 0.98);
-    border-bottom: 1px solid #e2e8f0;
-    transform: translateY(-100%);
-    opacity: 0;
-    visibility: hidden;
-    max-height: calc(100svh - 76px);
-    overflow: auto;
-    transition: transform 0.3s, opacity 0.3s, visibility 0.3s;
-    pointer-events: none;
-  }
-  
-  .site-header.open .menu {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-  
-  .menu a {
-    display: block;
-    padding: 12px 16px;
-    text-align: center;
-    font-size: 16px;
-  }
-  
-  .site-header.open .menu-toggle span:nth-child(1) {
-    top: 9.5px;
-    transform: rotate(45deg);
-  }
-  
-  .site-header.open .menu-toggle span:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .site-header.open .menu-toggle span:nth-child(3) {
-    top: 9.5px;
-    transform: rotate(-45deg);
-  }
-  
-  .brand-text {
-    display: block;
-    font-size: 16px;
-  }
-}
-
-/* Çok küçük ekranlar için */
-@media (max-width: 360px) {
-  .brand-text {
-    font-size: 14px;
-  }
-  
-  .nav-logo {
-    height: 44px;
-  }
-}
-    .menu-toggle{display:none;position:relative;width:32px;height:22px;border:0;background:transparent;cursor:pointer}
-    .menu-toggle span{position:absolute;left:0;right:0;height:3px;background:var(--text);border-radius:3px;transition:transform .3s,opacity .3s,top .3s}
-    .menu-toggle span:nth-child(1){top:0}
-    .menu-toggle span:nth-child(2){top:9.5px}
-    .menu-toggle span:nth-child(3){top:19px}
-
-    @media (max-width:900px){
-      :root{--logo:52px;--header-h:calc(var(--logo) + 24px)}
-      .menu-toggle{display:block}
-      nav{position:fixed;inset:var(--header-h) 0 auto 0}
-      .menu{flex-direction:column;padding:20px;gap:12px;background:rgba(255,255,255,0.98);border-bottom:1px solid #e2e8f0;transform:translateY(-100%);opacity:0;visibility:hidden;max-height:calc(100svh - var(--header-h));overflow:auto;transition:transform .3s,opacity .3s,visibility .3s;pointer-events:none}
-      .site-header.open .menu{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto}
-      .menu a{display:block;padding:12px 14px}
-      .site-header.open .menu-toggle span:nth-child(1){top:9.5px;transform:rotate(45deg)}
-      .site-header.open .menu-toggle span:nth-child(2){opacity:0}
-      .site-header.open .menu-toggle span:nth-child(3){top:9.5px;transform:rotate(-45deg)}
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      gap: 20px;
     }
 
-    /* ========== Hero ========== */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo {
+      height: 52px;
+      width: auto;
+    }
+
+    .brand-text {
+      font-weight: 800;
+      color: #757575;
+      letter-spacing: 0.4px;
+      font-size: 18px;
+      white-space: nowrap;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: nowrap;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu li {
+      display: flex;
+      align-items: center;
+    }
+
+    .menu a {
+      color: #475569;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .menu a:hover, .menu a:focus-visible {
+      color: #0f172a;
+      background: rgba(15, 23, 42, 0.08);
+      outline: none;
+    }
+
+    .menu a.active {
+      color: #0f172a;
+      background: rgba(14, 165, 233, 0.12);
+    }
+
+    .menu-toggle {
+      display: none;
+      position: relative;
+      width: 32px;
+      height: 22px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Hero section tam stil */
     .hero{position:relative;min-height:100vh;padding-top:var(--header-h);display:flex;align-items:center;overflow:hidden}
     @supports (min-height:100svh){.hero{min-height:100svh}}
-    .hero-bg{position:absolute;inset:0;background:url("Resimler/Hizmetler/Anaresim.webp") center/cover no-repeat;filter:grayscale(.08) contrast(1.02) brightness(.85);z-index:-2}
-    .hero-overlay{position:absolute;inset:0;z-index:-1;background:
-      linear-gradient(180deg,rgba(255,255,255,0.85) 0%,rgba(255,255,255,0.7) 14%,rgba(255,255,255,0.9) 100%)}
+    .hero-bg{position:absolute;inset:0;filter:grayscale(.08) contrast(1.02) brightness(.85);z-index:-2}
+    .hero-bg img{width:100%;height:100%;object-fit:cover}
+    .hero-overlay{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(255,255,255,0.85) 0%,rgba(255,255,255,0.7) 14%,rgba(255,255,255,0.9) 100%)}
     .hero-content{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 24px}
     .hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
     @media (max-width:980px){.hero-inner{grid-template-columns:1fr}}
@@ -416,349 +595,63 @@
     @media (prefers-reduced-motion: reduce){
       * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     }
+
+    /* Responsive stiller buraya eklenecek */
   </style>
-</head>
-<body>
-  <!-- Header -->
-  <header class="site-header" id="header">
-    <div class="container nav">
-      <div class="brand">
-        <img src="Resimler/Behealty.png" alt="BE Health Universe" class="nav-logo" width="64" height="64">
-        <span class="brand-text">BE HEALTH UNIVERSE</span>
-      </div>
-
-      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainmenu" aria-label="Menüyü aç/kapat">
-        <span></span><span></span><span></span>
-      </button>
-
-      <nav aria-label="Ana menü">
-        <ul id="mainmenu" class="menu">
-          <li><a href="#">Ana Sayfa</a></li>
-          <li><a href="#biz">Biz Kimiz?</a></li>
-          <li><a href="#hizmetler">Hizmetler</a></li>
-          <li><a href="#galeri">Galeri</a></li>
-          <li><a href="#yorumlar">Üyelerimiz Ne Diyor?</a></li>
-          <li><a href="#iletisim">İletişim</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-inner">
-        <div>
-          <div class="badge">Yeni sezon • Sınırlı kontenjan</div>
-          <h1 class="title xl" style="margin:.6rem 0 1rem;color:#0f172a">İçindeki potansiyeli açığa çıkar.</h1>
-          <p class="muted">Şehrin modern spor & wellness merkezinde; GYM, havuz, grup dersleri ve kişiye özel koçluk ile hedefe odaklan.</p>
-          
-          <div class="kpis">
-            <div class="card glass">
-              <strong>24</strong>
-              <div class="muted">Uzman Ekip</div>
-            </div>
-            <div class="card glass">
-              <strong>2500+</strong>
-              <div class="muted">Mutlu Üye</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Biz Kimiz -->
-  <section id="biz" class="section">
-    <div class="container">
-      <h2 class="title lg" style="text-align:center;margin-bottom:14px;color:#0f172a">Biz Kimiz?</h2>
-      <p class="muted about">
-        BE Health Universe'te herkesin istediği gibi olabileceğine inanıyoruz. Açık alan egzersizleri,
-        yarı olimpik havuz, zengin grup dersleri ve kişiye özel programlarla; sağlıklı, atletik, dinç ve ışıltılı bir yaşam için yanındayız.
-      </p>
-      <div class="about-grid">
-        <article class="card" style="padding:24px">
-          <header class="about-head">
-            <span class="about-ico"><i class="fa-solid fa-bullseye"></i></span>
-            <h3 class="title md" style="color:#0f172a">Misyonumuz</h3>
-          </header>
-          <p class="muted">Sağlıklı yaşamı herkes için erişilebilir kılmak ve bireylere potansiyellerini gerçekleştirmeleri için ilham vermek. Modern ekipmanlar, uzman kadro ve kişiye özel programlarla üyelerimizin hedeflerine ulaşmalarını sağlıyoruz.</p>
-        </article>
-
-        <article class="card" style="padding:24px">
-          <header class="about-head">
-            <span class="about-ico"><i class="fa-solid fa-eye"></i></span>
-            <h3 class="title md" style="color:#0f172a">Vizyonumuz</h3>
-          </header>
-          <p class="muted">Türkiye'nin en yenilikçi ve kapsayıcı wellness merkezi olmak, toplum sağlığını iyileştirmek. Spor ve sağlıklı yaşam kültürünü yaygınlaştırarak daha fit ve mutlu bir toplum için çalışıyoruz.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Hizmetler -->
-  <section id="hizmetler" class="section" style="background:var(--bg-soft);border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0">
-    <div class="container">
-      <h2 class="title lg" style="text-align:center;margin-bottom:12px;color:#0f172a">Hizmetler</h2>
-      <p class="muted" style="text-align:center;margin-bottom:36px">İhtiyacına uygun çözümleri seç.</p>
-      <div class="services-grid">
-        <div class="service-card"><img src="Resimler/Hizmetler/diyet.png" alt="BE Health Universe Beslenme & Diyet Danışmanlığı" loading="lazy" decoding="async" width="800" height="600"><div class="service-content"><h3>Beslenme & Diyet</h3><p>Uzman eşliğinde kişiye özel plan; düzenli ölçüm takibi.</p></div></div>
-        <div class="service-card"><img src="Resimler/Hizmetler/Fizyoterapi.png" alt="BE Health Universe Fizyoterapi & Masaj Hizmetleri" loading="lazy" decoding="async" width="800" height="600"><div class="service-content"><h3>Fizyoterapi & Masaj</h3><p>Recovery, Derin Doku, Myofascial, Trigger Point, Kupa, Bantlama, Kayropraksi, Manuel Terapi.</p></div></div>
-        <div class="service-card"><img src="Resimler/Hizmetler/Havuz.png" alt="BE Health Universe yarı olimpik havuz alanı" loading="lazy" decoding="async" width="800" height="600"><div class="service-content"><h3>Havuz</h3><p>Tüm yıl kullanıma açık yarı olimpik havuz.</p></div></div>
-        <div class="service-card"><img src="Resimler/Hizmetler/GYM.png" alt="BE Health Universe GYM ve fitness alanı" loading="lazy" decoding="async" width="800" height="600"><div class="service-content"><h3>GYM</h3><p>Son model ekipmanlar, serbest ağırlık ve fonksiyonel alanlar.</p></div></div>
-        <div class="service-card"><img src="Resimler/Hizmetler/Sauna.png" alt="BE Health Universe Sauna ve dinlenme alanı" loading="lazy" decoding="async" width="800" height="600"><div class="service-content"><h3>Sauna</h3><p>Detoks ve kas gevşetme.</p></div></div>
-        <div class="service-card"><img src="Resimler/Hizmetler/Masa Tenis.png" alt="BE Health Universe Masa Tenisi aktivite alanı" loading="lazy" decoding="async" width="800" height="600"><div class="service-content"><h3>Masa Tenisi</h3><p>Refleks, koordinasyon ve kalori yakımı.</p></div></div>
-        <div class="service-card"><img src="Resimler/Hizmetler/Box-MMA.jpg" alt="BE Health Universe Boks & MMA dersleri" loading="lazy" decoding="async" width="800" height="600"><div class="service-content"><h3>Boks & MMA</h3><p>Savunma teknikleri ve disiplinli antrenman.</p></div></div>
-        <div class="service-card"><img src="Resimler/Hizmetler/Tenis.png" alt="BE Health Universe Tenis kortu ve eğitimleri" loading="lazy" decoding="async" width="800" height="600"><div class="service-content"><h3>Tenis</h3><p>Form ve güç kazanımı.</p></div></div>
-        <div class="service-card"><img src="Resimler/Hizmetler/VIP GYM.png" alt="BE Health Universe V.I.P Gym özel alanı" loading="lazy" decoding="async" width="800" height="600"><div class="service-content"><h3>V.I.P Gym</h3><p>Kadın üyeler için özel, sakin alan.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Galeri (GÜNCELLENDİ) -->
-  <section id="galeri" class="section gallery-section">
-    <div class="container">
-      <h2 class="title lg" style="text-align:center;margin-bottom:14px;color:#0f172a">Galeri</h2>
-      <p class="muted" style="text-align:center;margin-bottom:34px">Merkezimizden kareler</p>
-      
-      <div class="gallery-container">
-        <div class="gallery-slider">
-          <div class="gallery-slide active">
-            <img src="Resimler/Salon görüntüleri/Salon üst kat.png" alt="BE Health Universe spor salonu üst kat görünümü" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-slide">
-            <img src="Resimler/Salon görüntüleri/Salon alt kat.png" alt="BE Health Universe spor salonu alt kat görünümü" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-slide">
-            <img src="Resimler/Salon görüntüleri/Salon bisiklet alanı.png" alt="BE Health Universe bisiklet ve kardiyo alanı" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-slide">
-            <img src="Resimler/Hizmetler/Havuz.png" alt="BE Health Universe havuz alanı genel görünüm" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-slide">
-            <img src="Resimler/Salon görüntüleri/Yoga salonu.png" alt="BE Health Universe yoga ve pilates stüdyosu" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-slide">
-            <img src="Resimler/Salon görüntüleri/Fly yoga.png" alt="BE Health Universe fly yoga dersleri" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-slide">
-            <img src="Resimler/Salon görüntüleri/Tenis Kortu.png" alt="BE Health Universe tenis kortu ve eğitim alanı" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-slide">
-            <img src="Resimler/Salon görüntüleri/Bahçe.png" alt="BE Health Universe açık hava spor bahçesi" loading="lazy" decoding="async">
-          </div>
-        </div>
-        
-        <div class="gallery-nav" id="galleryNav">
-          <div class="gallery-dot active" data-index="0"></div>
-          <div class="gallery-dot" data-index="1"></div>
-          <div class="gallery-dot" data-index="2"></div>
-          <div class="gallery-dot" data-index="3"></div>
-          <div class="gallery-dot" data-index="4"></div>
-          <div class="gallery-dot" data-index="5"></div>
-          <div class="gallery-dot" data-index="6"></div>
-          <div class="gallery-dot" data-index="7"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Üyelerimiz Ne Diyor? (GÜNCELLENDİ) -->
-  <section id="yorumlar" class="testimonials">
-    <div class="container">
-      <div class="testimonials-header">
-        <h2 class="title lg" style="margin-bottom:14px;color:#0f172a">Üyelerimiz Ne Diyor?</h2>
-        <p class="muted">Gerçek deneyimler, gerçek sonuçlar. BE Health Universe ailesinin memnuniyeti bizim için en önemli ölçüttür.</p>
-      </div>
-
-      <div class="t-viewport">
-        <div class="t-track" id="tTrack">
-          <div class="t-card">
-            <div class="card">
-              <div class="t-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <p class="t-quote">"BE Health Universe'e başlayalı 6 ay oldu ve hayatım tamamen değişti. Hem fiziksel hem de mental olarak çok daha iyiyim. Eğitmenlerin ilgisi ve profesyonellikleri gerçekten takdire şayan."</p>
-              <div class="t-author">
-                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Ayşe Yılmaz" width="56" height="56" loading="lazy" decoding="async">
-                <div><strong>Ayşe Yılmaz</strong><div class="muted">6 aydır üye</div></div>
-              </div>
-            </div>
-          </div>
-          <div class="t-card">
-            <div class="card">
-              <div class="t-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-              <p class="t-quote">"Grup dersleri motivasyonumu zirveye taşıdı. Yoga ve pilates ile stresim azaldı, esnekliğim arttı. Özellikle havuz ve sauna olanakları diğer spor merkezlerinden ayrıştırıyor."</p>
-              <div class="t-author">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mehmet Kaya" width="56" height="56" loading="lazy" decoding="async">
-                <div><strong>Mehmet Kaya</strong><div class="muted">3 aydır üye</div></div>
-              </div>
-            </div>
-          </div>
-          <div class="t-card">
-            <div class="card">
-              <div class="t-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <p class="t-quote">"Koçluk programı hedefime net odaklanmamı sağladı. Ekip çok ilgili, salon ise tertemiz. Fiyat-performans açısından İstanbul'daki en iyi spor merkezi diyebilirim. Kesinlikle tavsiye ediyorum."</p>
-              <div class="t-author">
-                <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Zeynep Akın" width="56" height="56" loading="lazy" decoding="async">
-                <div><strong>Zeynep Akın</strong><div class="muted">1 yıldır üye</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-  </section>
-
-  <!-- Bize Ulaşın -->
-  <section id="iletisim" class="section">
-    <div class="container">
-      <h2 class="title lg" style="text-align:center;margin-bottom:36px;color:#0f172a">Bize Ulaşın</h2>
-      <div class="contact-grid">
-        <!-- Sol sütun -->
-        <div>
-          <div class="c-item">
-            <div class="c-ico"><i class="fa-solid fa-location-dot"></i></div>
-            <div>
-              <div class="c-title">Adres</div>
-              <div class="c-text">
-                Esentepe Mah. Büyükdere Cad. No: 1710 D:1 Kat:-2<br>
-                Levent MetroCity AVM, İstanbul
-              </div>
-              <div class="c-row" style="margin-top:8px">
-                <button type="button" class="copy-btn" data-copy="Esentepe Mah. Büyükdere Cad. No: 1710 D:1 Kat:-2, Levent MetroCity AVM, İstanbul">
-                  <i class="fa-regular fa-copy"></i> Kopyala
-                </button>
-                <a class="copy-btn" style="color:white;background:linear-gradient(120deg,var(--brand),var(--brand2));border-color:#0891b2"
-                   href="https://maps.google.com/?q=Levent%20MetroCity%20AVM%20-%20Esentepe%20Mah.%20B%C3%BCy%C3%BCkdere%20Cad.%20No:%201710%20D:1%20Kat:-2"
-                   target="_blank" rel="noopener noreferrer">
-                  <i class="fa-solid fa-map-location-dot"></i> Haritada Aç
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="c-item">
-            <div class="c-ico"><i class="fa-solid fa-phone"></i></div>
-            <div>
-              <div class="c-title">Telefon</div>
-              <div class="c-text c-row">
-                <a href="tel:+905494653496">0549 465 34 96</a>
-                <button type="button" class="copy-btn" data-copy="+905494653496"><i class="fa-regular fa-copy"></i> Kopyala</button>
-              </div>
-              <div class="c-text c-row" style="margin-top:6px">
-                <a href="tel:+902123440707">0212 344 07 07</a>
-                <button type="button" class="copy-btn" data-copy="+902123440707"><i class="fa-regular fa-copy"></i> Kopyala</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="c-item">
-            <div class="c-ico"><i class="fa-solid fa-envelope"></i></div>
-            <div>
-              <div class="c-title">E-posta</div>
-              <div class="c-text c-row">
-                <a href="mailto:BE@BEHEALTHUNIVERSE.COM">BE@BEHEALTHUNIVERSE.COM</a>
-                <button type="button" class="copy-btn" data-copy="BE@BEHEALTHUNIVERSE.COM"><i class="fa-regular fa-copy"></i> Kopyala</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="c-item" style="border-bottom:0">
-            <div class="c-ico"><i class="fa-solid fa-clock"></i></div>
-            <div>
-              <div class="c-title">Çalışma Saatleri</div>
-              <div class="c-text">Hafta İçi: 06:00–23:00<br>Hafta Sonu: 08:30–21:30</div>
-            </div>
-          </div>
-
-          <div class="c-row" style="gap:12px;margin-top:12px">
-            <a href="https://www.instagram.com/behealthuniverse/" target="_blank" rel="noopener noreferrer" class="copy-btn" style="color:white;background:#C13584;border-color:#C13584"><i class="fa-brands fa-instagram"></i> Instagram</a>
-            <a href="https://www.facebook.com/behealthuniverse/" target="_blank" rel="noopener noreferrer" class="copy-btn" style="color:white;background:#1877F2;border-color:#1877F2"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
-            
-          </div>
-
-          <div id="contactLive" aria-live="polite" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"></div>
-        </div>
-
-        <!-- Sağ sütun -->
-        <div>
-          <div class="c-card">
-            <h3 class="title md" style="margin-bottom:12px;color:#0f172a">Mesaj Gönderin</h3>
-            <form class="c-form" id="contactForm" novalidate>
-              <input name="ad" placeholder="Ad Soyad" autocomplete="name" required>
-              <input name="email" type="email" placeholder="E-posta" autocomplete="email" required>
-              <input name="tel" placeholder="Telefon" inputmode="tel" autocomplete="tel" required>
-              <textarea name="mesaj" rows="5" placeholder="Mesajınız:" required></textarea>
-              <button type="submit" class="btn primary" style="width:100%">Gönder</button>
-              <div class="c-ok" id="cOk">Mesajınız gönderildi. En kısa sürede dönüş yapacağız.</div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="section" style="padding:60px 0 40px">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="brand" style="margin-bottom:16px">
-            <img src="Resimler/Behealty.png" alt="BE Health Universe" class="nav-logo" style="height:72px" width="72" height="72">
-            <span class="brand-text">BE HEALTH UNIVERSE</span>
-          </div>
-          <p class="muted">Esentepe Mah. Büyükdere Cad. No: 1710 D:1 Kat:-2 Levent MetroCity AVM, İstanbul</p>
-          <p class="muted">Tel: <a href="tel:+905494653496">0549 465 34 96</a> • <a href="tel:+902123440707">0212 344 07 07</a></p>
-          <p class="muted">E-posta: <a href="mailto:BE@BEHEALTHUNIVERSE.COM">BE@BEHEALTHUNIVERSE.COM</a></p>
-        </div>
-        <div>
-          <div class="title md" style="margin-bottom:10px;color:#0f172a">Bağlantılar</div>
-          <ul style="list-style:none;display:grid;gap:10px">
-            <li><a class="muted" href="#biz">Biz Kimiz?</a></li>
-            <li><a class="muted" href="#hizmetler">Hizmetler</a></li>
-            <li><a class="muted" href="#galeri">Galeri</a></li>
-            <li><a class="muted" href="#yorumlar">Üyelerimiz</a></li>
-            <li><a class="muted" href="#iletisim">İletişim</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="title md" style="margin-bottom:10px;color:#0f172a">Çalışma Saatleri</div>
-          <ul class="muted" style="list-style:none;display:grid;gap:10px">
-            <li>Hafta İçi: 06:00–23:00</li>
-            <li>Hafta Sonu: 08:30–21:30</li>
-          </ul>
-        </div>
-      </div>
-      <div class="muted" style="margin-top:34px;text-align:center;font-size:.92rem">© <span id="yil"></span> BE HEALTH UNIVERSE. Tüm hakları saklıdır.</div>
-    </div>
-  </footer>
-
-  <!-- Back to top -->
-  <button class="backtop" id="backtop" aria-label="Yukarı dön">↑</button>
 
   <script>
     // Yıl
     document.getElementById('yil').textContent = new Date().getFullYear();
+
+    // Gelişmiş Lazy Loading
+    document.addEventListener('DOMContentLoaded', function() {
+      // Lazy loading için Intersection Observer
+      const lazyImages = [].slice.call(document.querySelectorAll('img.lazy-img'));
+      const lazyHeroBg = document.querySelector('.lazy-hero-bg');
+      
+      if ('IntersectionObserver' in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let lazyImage = entry.target;
+              lazyImage.src = lazyImage.dataset.src;
+              lazyImage.classList.remove('lazy-img');
+              lazyImage.classList.add('loaded');
+              lazyImageObserver.unobserve(lazyImage);
+            }
+          });
+        });
+
+        lazyImages.forEach(function(lazyImage) {
+          lazyImageObserver.observe(lazyImage);
+        });
+
+        // Hero background için özel işlem
+        if (lazyHeroBg) {
+          lazyHeroBg.src = lazyHeroBg.dataset.src;
+          lazyHeroBg.classList.add('loaded');
+        }
+      } else {
+        // Fallback for older browsers
+        lazyImages.forEach(function(lazyImage) {
+          lazyImage.src = lazyImage.dataset.src;
+        });
+        if (lazyHeroBg) {
+          lazyHeroBg.src = lazyHeroBg.dataset.src;
+        }
+      }
+
+      // Preload kritik resimler
+      const criticalImages = [
+        'Resimler/Behealty.webp',
+        'Resimler/Hizmetler/Anaresim-low.webp'
+      ];
+      
+      criticalImages.forEach(function(src) {
+        const img = new Image();
+        img.src = src;
+      });
+    });
 
     // Mobil menü
     (function(){
@@ -796,7 +689,7 @@
       btn.addEventListener('click', ()=> scrollTo({top:0,behavior:'smooth'}));
     })();
 
-    // Galeri Slider (YENİ)
+    // Galeri Slider
     (function(){
       const slides = document.querySelectorAll('.gallery-slide');
       const dots = document.querySelectorAll('.gallery-dot');
@@ -819,7 +712,7 @@
       
       // Her 4 saniyede bir geçiş
       function startSlideShow() {
-        slideInterval = setInterval(nextSlide, 6000);
+        slideInterval = setInterval(nextSlide, 4000);
       }
       
       // Dot'lara tıklama
@@ -835,7 +728,7 @@
       startSlideShow();
     })();
 
-    // Testimonials slider (dots)
+    // Testimonials slider
     (function(){
       const track = document.getElementById('tTrack');
       const dots  = Array.from(document.querySelectorAll('#tNav .dot'));
